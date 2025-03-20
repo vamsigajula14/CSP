@@ -9,16 +9,35 @@ function Guide() {
   const [guides, setGuides] = useState<GuideType[]>([]);
   const [selectedGuide, setSelectedGuide] = useState<GuideType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    fetchGuides();
+    fetchUser();
   }, []);
 
-  async function fetchGuides() {
+  useEffect(() => {
+    if (user) {
+      fetchGuides(user.id);
+    }
+  }, [user]);
+
+  async function fetchUser() {
+    const { data, error } = await supabase.auth.getUser();
+    if (error) {
+      toast.error("Failed to fetch user data");
+      console.error("User fetch error:", error);
+    } else {
+      setUser(data.user);
+    }
+  }
+
+  async function fetchGuides(userId: string) {
+    setLoading(true);
     try {
       const { data, error } = await supabase
         .from("guides")
         .select("*")
+        .eq("user_id", userId) // Fetch guides for logged-in user
         .order("created_at", { ascending: false });
 
       if (error) throw error;
