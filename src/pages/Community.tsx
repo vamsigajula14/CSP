@@ -5,11 +5,14 @@ import { supabase, Discussion, Profile, Vote } from '../lib/supabase';
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';
 import ReactMarkdown from 'react-markdown';
+<<<<<<< HEAD
 import ReplyList from "../components/ReplyList";
 import VoteButton from "../components/VoteButton";
 import DeleteButton from "../components/DeleteButton";
 import RepliesList from "../components/RepliesList";
 
+=======
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
 
 function Community() {
   const [discussions, setDiscussions] = useState<(Discussion & { author: Profile, votes: number, hasVoted: boolean })[]>([]);
@@ -121,11 +124,18 @@ function Community() {
             <div className="space-y-6">
               {discussions.map((discussion) => (
                 <DiscussionCard
+<<<<<<< HEAD
                 key={discussion.id}
                 discussion={discussion}
                 onVote={handleVote}
                 user={user} // ✅ Pass user as a prop
               />              
+=======
+                  key={discussion.id}
+                  discussion={discussion}
+                  onVote={handleVote}
+                />
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
               ))}
             </div>
           )}
@@ -160,6 +170,7 @@ function Community() {
     </div>
   );
 }
+<<<<<<< HEAD
   
 
 function DiscussionCard({
@@ -170,6 +181,15 @@ function DiscussionCard({
   discussion: Discussion & { author: Profile; votes: number; hasVoted: boolean };
   onVote: (id: string, hasVoted: boolean) => Promise<void>;
   user: Profile | null;
+=======
+
+function DiscussionCard({
+  discussion,
+  onVote
+}: {
+  discussion: Discussion & { author: Profile; votes: number; hasVoted: boolean };
+  onVote: (id: string, hasVoted: boolean) => Promise<void>;
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
 }) {
   return (
     <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
@@ -180,11 +200,26 @@ function DiscussionCard({
             <ReactMarkdown>{discussion.content}</ReactMarkdown>
           </div>
         </div>
+<<<<<<< HEAD
 
         {/* Vote Button */}
         <VoteButton discussionId={discussion.id} userId={user?.id ?? ''} />
       </div>
 
+=======
+        <button
+          onClick={() => onVote(discussion.id, discussion.hasVoted)}
+          className={`flex items-center space-x-1 px-3 py-1 rounded-full ${
+            discussion.hasVoted
+              ? 'bg-green-100 text-green-800'
+              : 'bg-gray-100 text-gray-600 hover:bg-green-50 hover:text-green-700'
+          }`}
+        >
+          <ThumbsUp className="h-4 w-4" />
+          <span>{discussion.votes}</span>
+        </button>
+      </div>
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
       <div className="flex items-center text-gray-600 mt-4">
         <User className="h-4 w-4 mr-1" />
         <span className="mr-4">{discussion.author?.full_name}</span>
@@ -192,6 +227,7 @@ function DiscussionCard({
           {format(new Date(discussion.created_at), 'MMM d, yyyy')}
         </span>
       </div>
+<<<<<<< HEAD
 
       {/* Show Delete Button only for the post author */}
       {user?.id === discussion.author.id && (
@@ -206,6 +242,8 @@ function DiscussionCard({
       )}
 
       {/* Tags */}
+=======
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
       <div className="flex flex-wrap gap-2 mt-4">
         {discussion.tags.map((tag) => (
           <span
@@ -216,15 +254,21 @@ function DiscussionCard({
           </span>
         ))}
       </div>
+<<<<<<< HEAD
 
       {/* 🔽 Add Reply List Here 🔽 */}
       <RepliesList discussionId={discussion.id} userId={user?.id ?? ''} />
+=======
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
     </div>
   );
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
 function NewDiscussionForm({
   onClose,
   onSuccess

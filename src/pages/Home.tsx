@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { Search as SearchIcon, ArrowRight } from 'lucide-react';
+=======
+import { Search, ArrowRight } from 'lucide-react';
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
 import { useNavigate } from 'react-router-dom';
 import { supabase, Guide } from '../lib/supabase';
 import toast from 'react-hot-toast';
@@ -7,8 +11,11 @@ import toast from 'react-hot-toast';
 function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [guides, setGuides] = useState<Guide[]>([]);
+<<<<<<< HEAD
   const [filteredGuides, setFilteredGuides] = useState<Guide[]>([]);
   const [isSearching, setIsSearching] = useState(false);
+=======
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,16 +26,25 @@ function Home() {
     try {
       const { data, error } = await supabase
         .from('guides')
+<<<<<<< HEAD
         .select('*');
 
       if (error) throw error;
       setGuides(data || []);
       setFilteredGuides(data || []); // Initialize filtered guides
+=======
+        .select('*')
+        .limit(3);
+
+      if (error) throw error;
+      setGuides(data || []);
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
     } catch (error) {
       console.error('Error fetching guides:', error);
     }
   }
 
+<<<<<<< HEAD
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setSearchQuery(query);
@@ -54,6 +70,9 @@ function Home() {
   };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
+=======
+  const handleSearch = (e: React.FormEvent) => {
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
     e.preventDefault();
     if (!searchQuery.trim()) {
       toast.error('Please enter a search term');
@@ -64,6 +83,7 @@ function Home() {
 
   const quickLinks = [
     {
+<<<<<<< HEAD
       title: 'Ask an Expert',
       description: 'Get personalized advice from agricultural experts',
       image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&q=80&w=500',
@@ -81,6 +101,25 @@ function Home() {
       image: 'https://images.unsplash.com/photo-1591696205602-2f950c417cb9?auto=format&fit=crop&q=80&w=500',
       link: '/guide',
     },
+=======
+      title: "Ask an Expert",
+      description: "Get personalized advice from agricultural experts",
+      image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&q=80&w=500",
+      link: "/community"
+    },
+    {
+      title: "Weather Updates",
+      description: "Check real-time weather forecasts for your region",
+      image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&q=80&w=500",
+      link: "/weather"
+    },
+    {
+      title: "Cultivation Guides",
+      description: "Access comprehensive paddy farming guides",
+      image: "https://images.unsplash.com/photo-1591696205602-2f950c417cb9?auto=format&fit=crop&q=80&w=500",
+      link: "/guide"
+    }
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
   ];
 
   return (
@@ -94,12 +133,21 @@ function Home() {
           Get comprehensive advice and support for successful paddy farming
         </p>
         <div className="max-w-2xl mx-auto">
+<<<<<<< HEAD
           <form onSubmit={handleSearchSubmit} className="relative flex items-center bg-white rounded-lg shadow-md p-2">
             <SearchIcon className="h-6 w-6 text-gray-400 ml-2" />
             <input
               type="text"
               value={searchQuery}
               onChange={handleSearch}
+=======
+          <form onSubmit={handleSearch} className="flex items-center bg-white rounded-lg shadow-md p-2">
+            <Search className="h-6 w-6 text-gray-400 ml-2" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
               placeholder="Search for farming advice..."
               className="flex-1 px-4 py-2 focus:outline-none"
             />
@@ -109,6 +157,7 @@ function Home() {
             >
               Search
             </button>
+<<<<<<< HEAD
 
             {/* Search Results */}
             {isSearching && searchQuery && (
@@ -131,6 +180,8 @@ function Home() {
                 )}
               </div>
             )}
+=======
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
           </form>
         </div>
       </div>
@@ -176,7 +227,11 @@ function QuickLinkCard({
   title,
   description,
   image,
+<<<<<<< HEAD
   onClick,
+=======
+  onClick
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
 }: {
   title: string;
   description: string;
@@ -200,4 +255,8 @@ function QuickLinkCard({
   );
 }
 
+<<<<<<< HEAD
 export default Home;
+=======
+export default Home;
+>>>>>>> aeabe0789f190afb6234d65cd3ff666f7f45df8c
